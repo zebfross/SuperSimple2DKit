@@ -5428,7 +5428,7 @@ MonoBehaviour:
   attacksWhat: 0
   oneHitKill: 0
   startCollisionDelay: 0
-  parent: {fileID: 0}
+  parent: {fileID: 674306458}
   isBomb: 0
   hitPower: 1
 --- !u!212 &1233827500
