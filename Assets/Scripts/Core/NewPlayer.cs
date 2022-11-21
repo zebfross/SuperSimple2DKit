@@ -23,6 +23,7 @@ public class NewPlayer : PhysicsObject
     [SerializeField] private ParticleSystem jumpParticles;
     [SerializeField] private GameObject pauseMenu;
     public RecoveryCounter recoveryCounter;
+    public Transform weaponHook;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -133,14 +134,14 @@ public class NewPlayer : PhysicsObject
             }
 
             //Punch
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("Fire1"))
             {
                 animator.SetTrigger("attack");
                 Shoot(false);
             }
 
             //Secondary attack (currently shooting) with right click
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
                 Shoot(true);
             }
