@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Weapons;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,9 +24,9 @@ public class NewPlayer : PhysicsObject
     [SerializeField] private ParticleSystem jumpParticles;
     [SerializeField] private GameObject pauseMenu;
     public RecoveryCounter recoveryCounter;
-    public GameObject weaponHook;
-    public GameObject weapon;
-    private AxeWeapon _axe;
+    public SpriteRenderer weaponHook;
+    public ThrowableWeapon weapon;
+    private ThrowableWeapon _axe;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -93,6 +94,9 @@ public class NewPlayer : PhysicsObject
         graphicSprites = GetComponentsInChildren<SpriteRenderer>();
 
         SetGroundType();
+
+        if(weapon != null && weaponHook != null)
+            weaponHook.sprite = weapon.weaponSprite;
     }
 
     private void Update()
@@ -419,7 +423,7 @@ public class NewPlayer : PhysicsObject
     {
         if(weaponHook != null)
         {
-            weaponHook.SetActive(!equip);
+            weaponHook.enabled = !equip;
         }
         //Flamethrower ability
         if (weapon != null)
@@ -430,8 +434,9 @@ public class NewPlayer : PhysicsObject
                 {
                     animator.SetBool("shooting", true);
                     var _weapon = Object.Instantiate(weapon, weaponHook.transform.position, weaponHook.transform.rotation);
-                    _weapon.layer = this.gameObject.layer;
-                    _axe = _weapon.GetComponent<AxeWeapon>();
+                    _weapon.gameObject.layer = this.gameObject.layer;
+                    _axe = _weapon.GetComponent<ThrowableWeapon>();
+                    _axe.Initialize();
                     GameManager.Instance.audioSource.PlayOneShot(equipSound);
                     flameParticlesAudioSource.Play();
                     shooting = true;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 593408915181736450}
   - component: {fileID: 7537385869839372944}
   m_Layer: 0
-  m_Name: axe
+  m_Name: spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 548fcc0fdab33364ea8ef4d94276d6f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa2ae7566299e004b9231e86d3475ec4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,10 +92,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4080185143045827040}
   - component: {fileID: 4911803606626531217}
-  - component: {fileID: 2136356262702929269}
   - component: {fileID: -5100888604109609752}
+  - component: {fileID: 121519347544079056}
   m_Layer: 0
-  m_Name: Axe
+  m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,29 +129,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.070609}
-  m_Size: {x: 4.9381924, y: 4.9897995}
+  m_Offset: {x: 1.3270451, y: 1.7660171}
+  m_Size: {x: 2.1875894, y: 3.2492268}
   m_Direction: 0
---- !u!114 &2136356262702929269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9013771959832082639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca4d73576c9a66d429115eb6fd0d599d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 12
-  speed: 0.15
-  rotation: -10
-  maxFlyDistance: 20
-  attachedPlatform: {fileID: 0}
-  canReturn: 1
-  canPull: 1
-  weaponSprite: {fileID: 21300000, guid: 548fcc0fdab33364ea8ef4d94276d6f8, type: 3}
 --- !u!50 &-5100888604109609752
 Rigidbody2D:
   serializedVersion: 4
@@ -173,3 +153,23 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &121519347544079056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013771959832082639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8910ee7dc873324298708199c61847c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 12
+  speed: 0.2
+  rotation: 0
+  maxFlyDistance: 10
+  attachedPlatform: {fileID: 0}
+  canReturn: 0
+  canPull: 0
+  weaponSprite: {fileID: 21300000, guid: aa2ae7566299e004b9231e86d3475ec4, type: 3}
