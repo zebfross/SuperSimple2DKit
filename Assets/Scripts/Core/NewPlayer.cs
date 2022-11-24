@@ -25,7 +25,7 @@ public class NewPlayer : PhysicsObject
     public RecoveryCounter recoveryCounter;
     public GameObject weaponHook;
     public GameObject weapon;
-    private GameObject _weapon;
+    private AxeWeapon _axe;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -115,7 +115,7 @@ public class NewPlayer : PhysicsObject
         }
 
         //Movement, jumping, and attacking!
-        if (!frozen)
+        if (!frozen && (_axe == null || !_axe.IsAttached()))
         {
             move.x = Input.GetAxis("Horizontal") + launch;
 
@@ -189,8 +189,22 @@ public class NewPlayer : PhysicsObject
         }
         else
         {
+            if(_axe != null && _axe.IsAttached())
+            {
+                //Secondary attack (currently shooting) with right click
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _axe.Return();
+                    Freeze(false);
+                } else
+                {
+                    Freeze(true);
+                    _axe.Pull(Input.GetAxis("Horizontal") + (launch / 3));
+                }
+            }
             //If the player is set to frozen, his launch should be zeroed out!
             launch = 0;
+
         }
     }
 
@@ -414,8 +428,9 @@ public class NewPlayer : PhysicsObject
                 if (!shooting)
                 {
                     animator.SetBool("shooting", true);
-                    _weapon = Object.Instantiate(weapon, weaponHook.transform.position, weaponHook.transform.rotation);
+                    var _weapon = Object.Instantiate(weapon, weaponHook.transform.position, weaponHook.transform.rotation);
                     _weapon.layer = this.gameObject.layer;
+                    _axe = _weapon.GetComponent<AxeWeapon>();
                     GameManager.Instance.audioSource.PlayOneShot(equipSound);
                     flameParticlesAudioSource.Play();
                     shooting = true;
@@ -426,7 +441,7 @@ public class NewPlayer : PhysicsObject
                 if (shooting)
                 {
                     animator.SetBool("shooting", false);
-                    Object.Destroy(_weapon);
+                    Object.Destroy(_axe.gameObject);
                     flameParticlesAudioSource.Stop();
                     GameManager.Instance.audioSource.PlayOneShot(holsterSound);
                     shooting = false;
@@ -446,7 +461,7 @@ public class NewPlayer : PhysicsObject
 
     public void ReEquipWeapon()
     {
-        Object.Destroy(_weapon);
+        Object.Destroy(_axe.gameObject);
         Shoot(false);
     }
 }

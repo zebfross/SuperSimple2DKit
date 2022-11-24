@@ -148,7 +148,8 @@ MonoBehaviour:
   speed: 0.15
   rotation: -10
   flyDistance: 0
-  maxFlyDistance: 10
+  maxFlyDistance: 20
+  attachedPlatform: {fileID: 0}
 --- !u!50 &-5100888604109609752
 Rigidbody2D:
   serializedVersion: 4

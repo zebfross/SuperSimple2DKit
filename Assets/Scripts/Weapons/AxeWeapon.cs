@@ -10,6 +10,7 @@ public class AxeWeapon : MonoBehaviour
     public float flyDistance = 0;
     public float maxFlyDistance = 10;
     public MovablePlatform attachedPlatform = null;
+    private bool returning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,9 +53,26 @@ public class AxeWeapon : MonoBehaviour
         {
             col.GetComponent<NewPlayer>().ReEquipWeapon();
         }
-        if (col.GetComponent<MovablePlatform>() != null)
+        if (col.GetComponent<MovablePlatform>() != null && !returning)
         {
             attachedPlatform = col.GetComponent<MovablePlatform>();
         }
+    }
+
+    public bool IsAttached()
+    {
+        return attachedPlatform != null;
+    }
+
+    public void Pull(float amount=0.1f)
+    {
+        gameObject.transform.position += new Vector3(amount, 0);
+        attachedPlatform.gameObject.transform.position += new Vector3(amount, 0);
+    }
+
+    public void Return()
+    {
+        attachedPlatform = null;
+        returning = true;
     }
 }
