@@ -9,30 +9,39 @@ public class AxeWeapon : MonoBehaviour
     public float rotation = -5;
     public float flyDistance = 0;
     public float maxFlyDistance = 10;
+    public MovablePlatform attachedPlatform = null;
     // Start is called before the first frame update
     void Start()
     {
+        if(GameManager.Instance.player.gameObject.transform.localScale.x < 0)
+        {
+            speed *= -1;
+            rotation *= -1;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        this.transform.Rotate(0, 0, rotation);
-        this.transform.position += new Vector3(speed, 0);
-        flyDistance += speed;
-        if(flyDistance > maxFlyDistance)
+        if(attachedPlatform == null)
         {
-            speed *= -1;
-            rotation *= -1;
-        } else if (flyDistance < 0)
-        {
-            GameManager.Instance.player.ReEquipWeapon();
+            this.transform.Rotate(0, 0, rotation);
+            this.transform.position += new Vector3(speed, 0);
+            flyDistance += speed;
+            if (Mathf.Abs(flyDistance) > Mathf.Abs(maxFlyDistance))
+            {
+                speed *= -1;
+                rotation *= -1;
+            }
+            else if (flyDistance == 0)
+            {
+                GameManager.Instance.player.ReEquipWeapon();
+            }
         }
 
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         //Attack Enemies
         if (col.GetComponent<EnemyBase>() != null)
@@ -42,6 +51,10 @@ public class AxeWeapon : MonoBehaviour
         if (col.GetComponent<NewPlayer>() != null)
         {
             col.GetComponent<NewPlayer>().ReEquipWeapon();
+        }
+        if (col.GetComponent<MovablePlatform>() != null)
+        {
+            attachedPlatform = col.GetComponent<MovablePlatform>();
         }
     }
 }
