@@ -196,7 +196,8 @@ public class NewPlayer : PhysicsObject
                 {
                     _axe.Return();
                     Freeze(false);
-                } else
+                }
+                else
                 {
                     Freeze(true);
                     _axe.Pull(Input.GetAxis("Horizontal") + (launch / 3));
