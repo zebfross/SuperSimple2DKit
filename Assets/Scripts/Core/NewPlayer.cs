@@ -23,7 +23,9 @@ public class NewPlayer : PhysicsObject
     [SerializeField] private ParticleSystem jumpParticles;
     [SerializeField] private GameObject pauseMenu;
     public RecoveryCounter recoveryCounter;
-    public Transform weaponHook;
+    public GameObject weaponHook;
+    public GameObject weapon;
+    private GameObject _weapon;
 
     // Singleton instantiation
     private static NewPlayer instance;
@@ -400,14 +402,20 @@ public class NewPlayer : PhysicsObject
 
     public void Shoot(bool equip)
     {
+        if(weaponHook != null)
+        {
+            weaponHook.SetActive(!equip);
+        }
         //Flamethrower ability
-        if (GameManager.Instance.inventory.ContainsKey("flamethrower"))
+        if (weapon != null)
         {
             if (equip)
             {
                 if (!shooting)
                 {
                     animator.SetBool("shooting", true);
+                    _weapon = Object.Instantiate(weapon, weaponHook.transform.position, weaponHook.transform.rotation);
+                    _weapon.layer = this.gameObject.layer;
                     GameManager.Instance.audioSource.PlayOneShot(equipSound);
                     flameParticlesAudioSource.Play();
                     shooting = true;
@@ -418,6 +426,7 @@ public class NewPlayer : PhysicsObject
                 if (shooting)
                 {
                     animator.SetBool("shooting", false);
+                    Object.Destroy(_weapon);
                     flameParticlesAudioSource.Stop();
                     GameManager.Instance.audioSource.PlayOneShot(holsterSound);
                     shooting = false;
@@ -433,5 +442,11 @@ public class NewPlayer : PhysicsObject
         {
             GameManager.Instance.GetInventoryItem(cheatItems[i], null);
         }
+    }
+
+    public void ReEquipWeapon()
+    {
+        Object.Destroy(_weapon);
+        Shoot(false);
     }
 }
