@@ -237,7 +237,7 @@ public class NewPlayer : PhysicsObject
         }
 
         frozen = freeze;
-        shooting = false;
+        //shooting = false;
         launch = 0;
     }
 
@@ -448,6 +448,7 @@ public class NewPlayer : PhysicsObject
                 {
                     animator.SetBool("shooting", false);
                     Object.Destroy(_axe.gameObject);
+                    Freeze(false);
                     flameParticlesAudioSource.Stop();
                     GameManager.Instance.audioSource.PlayOneShot(holsterSound);
                     shooting = false;

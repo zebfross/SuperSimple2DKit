@@ -20,6 +20,9 @@ namespace Assets.Scripts.Weapons
         public bool canPull = true;
         protected bool facingRight = true;
         public Sprite weaponSprite;
+        private Vector2 targetOffset = new Vector2(0, 2);
+        [System.NonSerialized] public Vector3 speedEased;
+        [System.NonSerialized] public Vector3 returnSpeed;
         // Start is called before the first frame update
         public void Start()
         {
@@ -44,23 +47,34 @@ namespace Assets.Scripts.Weapons
             if (attachedPlatform == null)
             {
                 this.transform.Rotate(0, 0, rotation);
-                this.transform.position += new Vector3(speed, 0);
                 flyDistance += speed;
-                if (Mathf.Abs(flyDistance) > Mathf.Abs(maxFlyDistance))
+                if (!returning && Mathf.Abs(flyDistance) > Mathf.Abs(maxFlyDistance))
                 {
                     if(canReturn)
                     {
-                        speed *= -1;
-                        rotation *= -1;
+                        returning = true;
                     }
                     else
                     {
                         GameManager.Instance.player.ReEquipWeapon();
                     }
                 }
-                else if (flyDistance == 0)
+
+                if(returning)
                 {
-                    GameManager.Instance.player.ReEquipWeapon();
+                    Vector3 distanceFromPlayer;
+
+                    distanceFromPlayer.x = (NewPlayer.Instance.transform.position.x + targetOffset.x) - transform.position.x;
+                    distanceFromPlayer.y = (NewPlayer.Instance.transform.position.y + targetOffset.y) - transform.position.y;
+
+                    returnSpeed.x = (Mathf.Abs(distanceFromPlayer.x) / distanceFromPlayer.x) * 2f;
+                    returnSpeed.y = (Mathf.Abs(distanceFromPlayer.y) / distanceFromPlayer.y) * 2f;
+
+                    transform.position += returnSpeed * Time.deltaTime * 4;
+                }
+                else
+                {
+                    transform.position += new Vector3(speed, 0);
                 }
             }
 
