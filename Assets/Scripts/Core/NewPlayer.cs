@@ -437,6 +437,10 @@ public class NewPlayer : PhysicsObject
                     animator.SetBool("shooting", true);
                     var _weapon = Object.Instantiate(weapon, weaponHook.transform.position, weaponHook.transform.rotation);
                     _weapon.gameObject.layer = this.gameObject.layer;
+                    if(transform.localScale.x < 0)
+                    {
+                        _weapon.transform.localScale = new Vector3(_weapon.transform.localScale.x * -1, _weapon.transform.localScale.y, _weapon.transform.localScale.z);
+                    }
                     _axe = _weapon.GetComponent<ThrowableWeapon>();
                     _axe.Initialize();
                     GameManager.Instance.audioSource.PlayOneShot(equipSound);
