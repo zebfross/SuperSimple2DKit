@@ -87,7 +87,7 @@ namespace Assets.Scripts.Weapons
             {
                 col.GetComponent<EnemyBase>().GetHurt(1, damage);
             }
-            if (col.GetComponent<NewPlayer>() != null && canReturn)
+            if (col.GetComponent<NewPlayer>() != null && canReturn && returning)
             {
                 col.GetComponent<NewPlayer>().ReEquipWeapon();
             }

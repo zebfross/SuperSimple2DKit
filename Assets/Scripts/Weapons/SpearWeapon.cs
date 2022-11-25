@@ -10,9 +10,9 @@ public class SpearWeapon : ThrowableWeapon
         base.Initialize();
 
         if (facingRight)
-            transform.rotation = Quaternion.Euler(0, 0, -55);
+            transform.rotation = Quaternion.Euler(0, 0, -90);
         else
-            transform.rotation = Quaternion.Euler(0, 0, 125);
+            transform.rotation = Quaternion.Euler(0, 0, 90);
     }
 
 }

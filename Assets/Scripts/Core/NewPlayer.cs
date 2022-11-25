@@ -96,7 +96,9 @@ public class NewPlayer : PhysicsObject
         SetGroundType();
 
         if(weapon != null && weaponHook != null)
+        {
             weaponHook.sprite = weapon.weaponSprite;
+        }
     }
 
     private void Update()
