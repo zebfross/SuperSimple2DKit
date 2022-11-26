@@ -5725,7 +5725,7 @@ Transform:
   m_LocalScale: {x: 24.560852, y: 17.500664, z: 0.78577}
   m_Children: []
   m_Father: {fileID: 674306468}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1239222307
 PrefabInstance:
@@ -9346,7 +9346,7 @@ Transform:
   m_LocalScale: {x: 0.78577, y: 0.78577, z: 0.78577}
   m_Children: []
   m_Father: {fileID: 674306468}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &2015808746
 ParticleSystemRenderer:
@@ -19356,7 +19356,7 @@ Transform:
   m_LocalScale: {x: 0.78577995, y: 0.78577995, z: 0.78577995}
   m_Children: []
   m_Father: {fileID: 674306468}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &2128901976
 PrefabInstance:
@@ -20051,11 +20051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4569125025086690, guid: 927e473a2ba484d75b382fc1faaf0eeb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.20843
+      value: -57.55
       objectReference: {fileID: 0}
     - target: {fileID: 4569125025086690, guid: 927e473a2ba484d75b382fc1faaf0eeb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5869601
+      value: 1.5294998
       objectReference: {fileID: 0}
     - target: {fileID: 4569125025086690, guid: 927e473a2ba484d75b382fc1faaf0eeb, type: 3}
       propertyPath: m_LocalPosition.z
